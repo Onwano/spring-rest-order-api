@@ -1,5 +1,4 @@
 pipeline {
- 
   agent any
 
   tools {
@@ -8,9 +7,9 @@ pipeline {
     jdk 'jdk_17'
   }
 
-   environment {
-   IMAGE_NAME = 'onwano/order-api'
-  }  
+  environment {
+    IMAGE_NAME = 'onwano/order-api'
+  }
 
   stages {
 
@@ -57,14 +56,15 @@ pipeline {
       steps {
         sh 'echo "========Creating Docker Image ============"'
         sh """
-               echo "IMAGE Name is - ${IMAGE_NAME}"
-               docker build -t $IMAGE_NAME:"${env.BUILD_NUMBER}" .
-            """      
+          echo "IMAGE Name is - ${IMAGE_NAME}"
+          docker build -t ${IMAGE_NAME}:${env.BUILD_NUMBER} .
+        """
         sh 'echo "======Completing Image Creation ====="'
       }
     }
 
   }
 }
+
 
  

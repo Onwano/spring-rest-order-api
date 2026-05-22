@@ -28,6 +28,33 @@ pipeline{
           
         }
       }
+
+
+     stage('Testing the application'){
+        steps{
+            sh 'echo "========Testing Java Application============"'
+            sh '''
+                 mvn test
+              '''
+            sh 'echo "======Testing Java Application completed====="'
+          
+        }
+      }
  
-  }
-}
+  stage('packing the application'){
+        steps{
+            sh 'echo "========Packing Java Application============"'
+            sh '''
+                 mvn clean package
+              '''
+            sh 'echo "======Packing Java Application completed====="'  
+        }
+      }
+  
+    stage('creating Docker Image'){
+        steps{
+            sh 'echo "========Creating Docker Image ============"'
+            sh 'echo "======Completing Image Creation ====="'       
+        }
+      }
+

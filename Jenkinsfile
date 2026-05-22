@@ -1,61 +1,62 @@
-pipeline{
-
+pipeline {
+ 
   agent any
-  
+
   tools {
     // '<name of tool>' given in the manage jenkins > Tools > Maven Installation
     maven 'Maven 3.9'
     jdk 'jdk_17'
- }
-
-  stages{
-      stage ('Verify versions'){
-        steps {
-          sh 'echo $JAVA_HOME'
-          sh 'which java'
-          sh 'java -version'
-          sh 'mvn -v'
-        }
-      }
-    
-      stage('building the application'){
-        steps{
-            sh 'echo "========Building Java Application============"'
-            sh '''
-                 mvn clean compile
-              '''
-            sh 'echo "======Building Java Application completed====="'
-          
-        }
-      }
-
-
-     stage('Testing the application'){
-        steps{
-            sh 'echo "========Testing Java Application============"'
-            sh '''
-                 mvn test
-              '''
-            sh 'echo "======Testing Java Application completed====="'
-          
-        }
-      }
- 
-  stage('packing the application'){
-        steps{
-            sh 'echo "========Packing Java Application============"'
-            sh '''
-                 mvn clean package
-              '''
-            sh 'echo "======Packing Java Application completed====="'  
-        }
-      }
-  
-    stage('creating Docker Image'){
-        steps{
-            sh 'echo "========Creating Docker Image ============"'
-            sh 'echo "======Completing Image Creation ====="'       
-        }
-      }
   }
-} 
+
+  stages {
+
+    stage('Verify versions') {
+      steps {
+        sh 'echo $JAVA_HOME'
+        sh 'which java'
+        sh 'java -version'
+        sh 'mvn -v'
+      }
+    }
+
+    stage('building the application') {
+      steps {
+        sh 'echo "========Building Java Application============"'
+        sh '''
+          mvn clean compile
+        '''
+        sh 'echo "======Building Java Application completed====="'
+      }
+    }
+
+    stage('Testing the application') {
+      steps {
+        sh 'echo "========Testing Java Application============"'
+        sh '''
+          mvn test
+        '''
+        sh 'echo "======Testing Java Application completed====="'
+      }
+    }
+
+    stage('packing the application') {
+      steps {
+        sh 'echo "========Packing Java Application============"'
+        sh '''
+          mvn clean package
+        '''
+        sh 'echo "======Packing Java Application completed====="'
+      }
+    }
+
+    stage('creating Docker Image') {
+      steps {
+        sh 'echo "========Creating Docker Image ============"'
+        sh 'echo "======Completing Image Creation ====="'
+      }
+    }
+
+  }
+}
+
+ 

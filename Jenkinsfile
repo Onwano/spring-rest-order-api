@@ -57,4 +57,5 @@ pipeline{
             sh 'echo "======Completing Image Creation ====="'       
         }
       }
-
+  }
+} 

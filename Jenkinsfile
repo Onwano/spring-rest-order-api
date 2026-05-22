@@ -8,6 +8,10 @@ pipeline {
     jdk 'jdk_17'
   }
 
+   environment {
+   IMAGE_NAME = 'onwano/order-api'
+  }  
+
   stages {
 
     stage('Verify versions') {
@@ -52,6 +56,10 @@ pipeline {
     stage('creating Docker Image') {
       steps {
         sh 'echo "========Creating Docker Image ============"'
+        sh """
+               echo "IMAGE Name is - ${IMAGE_NAME}"
+               docker build -t $IMAGE_NAME:"${env.BUILD_NUMBER}" .
+            """      
         sh 'echo "======Completing Image Creation ====="'
       }
     }
